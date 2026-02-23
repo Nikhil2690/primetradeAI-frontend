@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import './App.css'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
@@ -22,7 +22,7 @@ function App() {
   if (loading) return <div className="flex h-screen items-center justify-center">Loading...</div>;
 
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route path="/" element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />} />
         <Route path='/register' element={!isAuthenticated ? <Register /> : <Navigate to="/dashboard" />} />
@@ -71,7 +71,7 @@ function App() {
         } />
 
       </Routes>
-    </BrowserRouter>
+    
   )
 }
 

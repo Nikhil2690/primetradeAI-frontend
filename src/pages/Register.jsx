@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const {register} = useAuthStore()
+  const navigate = useNavigate();
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -25,10 +26,14 @@ const Register = () => {
 
       if (response) {
         alert("Registration Successful!");
-        Navigate("/login");
-      }
+        setLoading(false);
+        navigate("/login");
+      } else {
+      alert(response?.message || "Registration failed");
+    }
     } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
+      alert("An unexpected error occurred");
+      console.log(error)
     } finally {
       setLoading(false);
     }
